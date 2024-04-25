@@ -12,7 +12,9 @@ const getGastosControl = async(req,res)=>{
 
 const addGastoControl = async(req,res)=>{
     try {
-        const {gasto} = req.body;
+        const {roommate,descripcion,monto} = req.body;
+        const gasto = {roommate,descripcion,monto}
+        console.log(gasto)
         const result = addGastoQuery(gasto);
         res.status(201).send(result);
     } catch (error) {
