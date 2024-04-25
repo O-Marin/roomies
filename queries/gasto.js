@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 const addGastoQuery = async (gasto) => {
   try {
     
-    
     gasto.id = uuidv4().slice(0, 8);
     
     const gastosJSON = JSON.parse(fs.readFileSync("data/gastos.json", "utf-8"));

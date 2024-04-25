@@ -14,8 +14,9 @@ const addGastoControl = async(req,res)=>{
     try {
         const {roommate,descripcion,monto} = req.body;
         const gasto = {roommate,descripcion,monto}
-        console.log(gasto)
-        const result = addGastoQuery(gasto);
+        
+        const result = await addGastoQuery(gasto);
+        await recalcularDeudasQuery();
         res.status(201).send(result);
     } catch (error) {
         res.status(500).send(error.message);
@@ -41,7 +42,7 @@ const deleteGastoControl = async (req, res) => {
         const id = req.query.id
         
         await deleteGastoQuery(id)
-        recalcularDeudasQuery()
+        await recalcularDeudasQuery()
         res.send("Gasto eliminado")
     } catch (error) {
         console.log(error)

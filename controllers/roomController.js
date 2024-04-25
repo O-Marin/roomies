@@ -1,9 +1,11 @@
 
-import { addRoommateQuery,getRoommatesQuery } from '../queries/roommate.js';
+import { addRoommateQuery,getRoommatesQuery,recalcularDeudasQuery } from '../queries/roommate.js';
+
 
 const addRoommateControl = async (req,res)=>{
     try {
-        const result = addRoommateQuery();
+        const result = await addRoommateQuery();
+        await recalcularDeudasQuery();
         res.status(201).send(result)
     } catch (error) {
         res.status(500).send(error.message)
