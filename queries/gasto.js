@@ -1,17 +1,16 @@
 import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
 
-const addGastoQuery = async (roommate, descripcion, monto) => {
+const addGastoQuery = async (gasto) => {
   try {
-    const gasto = {
-      roommate,
-      descripcion,
-      monto,
-    };
-    console.log(gasto);
+    
+    
+    gasto.id = uuidv4().slice(0, 8);
+    
     const gastosJSON = JSON.parse(fs.readFileSync("data/gastos.json", "utf-8"));
 
     gastosJSON.gastos.push(gasto);
+    
     fs.writeFileSync("data/gastos.json", JSON.stringify(gastosJSON));
   } catch (err) {
     console.log(err.message);
